@@ -1,0 +1,5 @@
+*.pt
+*.pkl
+*.webm
+__pycache__/
+*.pyc

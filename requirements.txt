@@ -1,0 +1,14 @@
+# Manipal-Climate-RNN — Python dependencies
+# Tested: Python 3.10 / 3.11, Ubuntu 22.04+
+
+numpy>=1.26.0
+pandas>=2.2.0
+scikit-learn>=1.4.0
+tqdm>=4.66.0
+
+# PyTorch — choose ONE of the lines below before installing
+# CPU-only (no GPU):
+#   pip install torch --index-url https://download.pytorch.org/whl/cpu
+# CUDA 12.1 (NVIDIA GPU):
+#   pip install torch --index-url https://download.pytorch.org/whl/cu121
+torch>=2.2.0

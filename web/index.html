@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Manipal Climate RNN — Forecast Dashboard</title>
+  <link rel="stylesheet" href="style.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+</head>
+<body>
+
+<!-- ══ HEADER ════════════════════════════════════════════════════════════════ -->
+<header class="site-header">
+  <div class="header-inner">
+    <div class="header-brand">
+      <span class="brand-icon">🌦</span>
+      <div>
+        <h1>Manipal Climate RNN</h1>
+        <p class="brand-sub">Stacked BiLSTM · 30-Day Lookback · 12 Atmospheric Features · 15-Year Dataset</p>
+      </div>
+    </div>
+    <div class="header-chip">
+      <span class="chip">4 Jan 2025 – 4 Jan 2026 · 365 Days</span>
+    </div>
+  </div>
+</header>
+
+<!-- ══ METRIC CARDS ═══════════════════════════════════════════════════════════ -->
+<section class="metrics-section">
+  <div class="metrics-grid">
+
+    <div class="metric-card" id="card-temp-rmse">
+      <div class="metric-icon">🌡️</div>
+      <div class="metric-body">
+        <div class="metric-label">Temperature RMSE</div>
+        <div class="metric-value" id="val-temp-rmse">—</div>
+        <div class="metric-target" id="tgt-temp-rmse">Target ≤ 0.60 °C</div>
+      </div>
+    </div>
+
+    <div class="metric-card" id="card-temp-mae">
+      <div class="metric-icon">📐</div>
+      <div class="metric-body">
+        <div class="metric-label">Temperature MAE</div>
+        <div class="metric-value" id="val-temp-mae">—</div>
+        <div class="metric-target">°C</div>
+      </div>
+    </div>
+
+    <div class="metric-card" id="card-precip-rmse">
+      <div class="metric-icon">🌧️</div>
+      <div class="metric-body">
+        <div class="metric-label">Precipitation RMSE</div>
+        <div class="metric-value" id="val-precip-rmse">—</div>
+        <div class="metric-target" id="tgt-precip-rmse">Target ≤ 12.50 mm</div>
+      </div>
+    </div>
+
+    <div class="metric-card" id="card-precip-mae">
+      <div class="metric-icon">📏</div>
+      <div class="metric-body">
+        <div class="metric-label">Precipitation MAE</div>
+        <div class="metric-value" id="val-precip-mae">—</div>
+        <div class="metric-target">mm</div>
+      </div>
+    </div>
+
+    <div class="metric-card metric-card--wide" id="card-climate">
+      <div class="metric-icon">📈</div>
+      <div class="metric-body">
+        <div class="metric-label">Climate Trend — OLS Regression Slope (2011–2026)</div>
+        <div class="metric-value" id="val-slope">+0.0480 °C/yr</div>
+        <div class="metric-target" id="slope-interp">
+          The annual mean temperature at Manipal increased by +0.0480 °C/year between
+          2011 and 2026, totalling +0.7201 °C over 15 years
+          (OLS slope m = +0.048004 °C/year, R² = 0.3032).
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ CHARTS ════════════════════════════════════════════════════════════════ -->
+<main class="charts-main">
+
+  <!-- Temperature -->
+  <section class="chart-card">
+    <div class="chart-card-header">
+      <span class="chart-dot dot-blue"></span>
+      <div>
+        <h2 class="chart-card-title">Daily Mean Temperature — Actual vs. Predicted</h2>
+        <p class="chart-card-sub">365-day test window · 4 Jan 2025 to 4 Jan 2026 · Target RMSE ≤ 0.6 °C</p>
+      </div>
+    </div>
+    <div class="chart-wrap"><canvas id="tempChart"></canvas></div>
+  </section>
+
+  <!-- Precipitation -->
+  <section class="chart-card">
+    <div class="chart-card-header">
+      <span class="chart-dot dot-green"></span>
+      <div>
+        <h2 class="chart-card-title">Daily Precipitation Sum — Actual vs. Predicted</h2>
+        <p class="chart-card-sub">365-day test window · 4 Jan 2025 to 4 Jan 2026 · Target RMSE ≤ 12.5 mm</p>
+      </div>
+    </div>
+    <div class="chart-wrap"><canvas id="precipChart"></canvas></div>
+  </section>
+
+  <!-- Climate OLS -->
+  <section class="chart-card">
+    <div class="chart-card-header">
+      <span class="chart-dot dot-purple"></span>
+      <div>
+        <h2 class="chart-card-title">Yearly Mean Temperature (2011–2026) with OLS Trendline</h2>
+        <p class="chart-card-sub">m = +0.048004 °C/year · R² = 0.3032 · Total rise: +0.7201 °C</p>
+      </div>
+    </div>
+    <div class="chart-wrap"><canvas id="climateChart"></canvas></div>
+  </section>
+
+</main>
+
+<!-- ══ FOOTER ════════════════════════════════════════════════════════════════ -->
+<footer class="site-footer">
+  Manipal-Climate-RNN · PyTorch Stacked BiLSTM (hidden=64, layers=2, bidir) ·
+  StandardScaler (fit on train only) · Adam lr=0.001 · MSELoss ·
+  Manipal University Atmospheric Dataset 2011–2026
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

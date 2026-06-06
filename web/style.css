@@ -1,0 +1,131 @@
+/* ══════════════════════════════════════════════════════════════════════════
+   Manipal-Climate-RNN — Dashboard Stylesheet
+   Dark scientific theme, CSS Grid layout
+   ══════════════════════════════════════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  /* Palette */
+  --bg-page:       #0d1117;
+  --bg-card:       #161b22;
+  --bg-hover:      #1c2430;
+  --border:        #30363d;
+  --border-bright: #58a6ff44;
+
+  /* Text */
+  --tx-primary:    #e6edf3;
+  --tx-secondary:  #8b949e;
+  --tx-dim:        #484f58;
+
+  /* Data colours */
+  --blue:    #58a6ff;   /* temp actual    */
+  --red:     #ff7b72;   /* temp predicted */
+  --green:   #3fb950;   /* precip actual  */
+  --amber:   #f0c000;   /* precip pred    */
+  --purple:  #d2a8ff;   /* climate scatter*/
+  --rose:    #ff6b9d;   /* regression line*/
+
+  --pass:  #3fb950;
+  --fail:  #ff7b72;
+  --grid:  #21262d;
+
+  /* Fonts */
+  --mono: "JetBrains Mono","Fira Code","Cascadia Code",monospace;
+  --sans: "Inter","Segoe UI",system-ui,sans-serif;
+
+  --r-sm: 6px; --r-md: 10px; --r-lg: 16px;
+  --shadow: 0 4px 24px rgba(0,0,0,.5);
+}
+
+html, body { min-height: 100vh; background: var(--bg-page); color: var(--tx-primary);
+             font-family: var(--sans); font-size: 14px; line-height: 1.6; }
+
+/* ── Header ──────────────────────────────────────────────────────────────── */
+.site-header {
+  background: var(--bg-card); border-bottom: 1px solid var(--border);
+  padding: 18px 28px;
+}
+.header-inner {
+  max-width: 1320px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 10px;
+}
+.header-brand { display: flex; align-items: center; gap: 14px; }
+.brand-icon   { font-size: 2.2rem; line-height: 1; }
+.header-brand h1 { font-size: 1.45rem; font-weight: 700; letter-spacing: -.02em; }
+.brand-sub { font-size: .72rem; color: var(--tx-secondary); font-family: var(--mono); margin-top: 2px; }
+.chip {
+  background: #1c2430; border: 1px solid var(--border);
+  border-radius: 99px; padding: 5px 14px;
+  font-size: .7rem; font-family: var(--mono); color: var(--blue);
+}
+
+/* ── Metric Cards ────────────────────────────────────────────────────────── */
+.metrics-section { max-width: 1320px; margin: 26px auto 0; padding: 0 20px; }
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto auto;
+  gap: 14px;
+}
+.metric-card--wide { grid-column: 1 / -1; }
+
+.metric-card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--r-lg); padding: 20px 22px;
+  box-shadow: var(--shadow); display: flex; align-items: flex-start;
+  gap: 14px; transition: border-color .2s, transform .18s;
+}
+.metric-card:hover { border-color: var(--border-bright); transform: translateY(-2px); }
+.metric-card--wide { background: linear-gradient(135deg,#161b22 0%,#111820 100%); }
+.metric-icon { font-size: 1.6rem; line-height: 1; flex-shrink: 0; margin-top: 2px; }
+.metric-label {
+  font-size: .68rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .08em; color: var(--tx-secondary); margin-bottom: 6px;
+}
+.metric-value {
+  font-size: 1.85rem; font-weight: 800; font-family: var(--mono);
+  letter-spacing: -.04em; color: var(--tx-primary);
+}
+.metric-target { font-size: .68rem; font-family: var(--mono); color: var(--amber); margin-top: 5px; }
+
+/* Pass / fail colouring injected by JS */
+.metric-pass .metric-value { color: var(--pass); }
+.metric-fail .metric-value { color: var(--fail); }
+.metric-pass .metric-target { color: var(--pass); }
+.metric-fail .metric-target { color: var(--fail); }
+
+@media (max-width:900px) { .metrics-grid { grid-template-columns: repeat(2,1fr); } }
+@media (max-width:540px) { .metrics-grid { grid-template-columns: 1fr; } }
+
+/* ── Chart Cards ─────────────────────────────────────────────────────────── */
+.charts-main {
+  max-width: 1320px; margin: 24px auto 0; padding: 0 20px 40px;
+  display: flex; flex-direction: column; gap: 26px;
+}
+.chart-card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--r-lg); padding: 22px 24px 18px; box-shadow: var(--shadow);
+}
+.chart-card-header { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 18px; }
+.chart-dot { width:10px; height:10px; border-radius:50%; flex-shrink:0; margin-top:5px; }
+.dot-blue   { background: var(--blue);   }
+.dot-green  { background: var(--green);  }
+.dot-purple { background: var(--purple); }
+.chart-card-title { font-size: 1rem; font-weight: 700; }
+.chart-card-sub   { font-size: .72rem; color: var(--tx-secondary); font-family: var(--mono); margin-top: 3px; }
+.chart-wrap { position: relative; height: 320px; }
+.chart-wrap canvas { width: 100% !important; height: 100% !important; }
+
+/* ── Footer ──────────────────────────────────────────────────────────────── */
+.site-footer {
+  border-top: 1px solid var(--border); text-align: center;
+  padding: 18px 20px; font-size: .65rem; font-family: var(--mono);
+  color: var(--tx-dim);
+}
+
+@media (max-width:640px) {
+  .site-header { padding: 14px; }
+  .charts-main, .metrics-section { padding: 0 10px; }
+  .chart-wrap { height: 240px; }
+}
