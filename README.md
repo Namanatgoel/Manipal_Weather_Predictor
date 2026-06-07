@@ -6,6 +6,22 @@
 
 ---
 
+## Output Demo
+
+<video src="https://github.com/user-attachments/assets/3abd4c3e-ed4e-46ae-a440-386956a03817" width="100%" controls>
+  Your browser does not support the video tag.
+</video>
+
+<img width="1842" height="230" alt="data_verification" src="https://github.com/user-attachments/assets/a64f6021-b7ca-4315-896a-673624b5d77f" />
+
+<img width="1841" height="497" alt="preprocessing" src="https://github.com/user-attachments/assets/1c7993c1-18cc-4eff-8669-f504de4b40ce" />
+
+<img width="1841" height="1075" alt="train(1)" src="https://github.com/user-attachments/assets/51a07427-e0b7-44e7-b50f-eeae7946e2a8" />
+
+<img width="1828" height="300" alt="train(2)" src="https://github.com/user-attachments/assets/f53b7af3-d871-4af9-bb40-58eb3933f357" />
+
+<img width="1831" height="801" alt="climate_analysis" src="https://github.com/user-attachments/assets/298b0b79-7aa4-4f88-83ad-3bad5a0eacb1" />
+
 ## Table of Contents
 1. [Executive Summary & Mathematical Setup](#1-executive-summary--mathematical-setup)
 2. [Complete Directory Tree](#2-complete-directory-tree)
